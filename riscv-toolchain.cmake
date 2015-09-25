@@ -1,0 +1,7 @@
+set(CMAKE_SYSTEM_NAME Generic)
+set(CMAKE_SYSTEM_PROCESSOR RV32IMXcam)
+set(CMAKE_C_COMPILER riscv64-unknown-elf-gcc)
+set(CMAKE_CXX_COMPILER riscv64-unknown-elf-g++)
+set(CMAKE_LINKER riscv64-unknown-elf-ld)
+set(_CMAKE_TOOLCHAIN_PREFIX riscv64-unknown-elf-)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32 -static -Wa,-march=RV32IMXcam" CACHE STRING "")
