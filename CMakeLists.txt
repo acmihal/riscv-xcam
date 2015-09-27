@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 2.8)
 
 project(riscv-xcam)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -fno-inline -std=c++11")
-set(CMAKE_VERBOSE_MAKEFILE on)
+# can be changed to target_compile_features with cmake 3.x
+add_compile_options("-std=c++11")
+
+#set(CMAKE_VERBOSE_MAKEFILE on)
 
 #include(ExternalProject)
 #ExternalProject_Add(
@@ -16,4 +18,13 @@ set(CMAKE_VERBOSE_MAKEFILE on)
 #add_library(libgtest IMPORTED STATIC GLOBAL)
 #add_dependencies(libgtest gtest)
 
+include_directories(include)
 add_subdirectory(libxcam)
+
+if(CMAKE_CROSSCOMPILING)
+    install(DIRECTORY include/ DESTINATION $ENV{RISCV}/riscv64-unknown-elf/include/riscv-xcam
+            FILES_MATCHING PATTERN "*.h")
+else()
+    install(DIRECTORY include/ DESTINATION $ENV{RISCV}/include/riscv-xcam
+            FILES_MATCHING PATTERN "*.h")
+endif()

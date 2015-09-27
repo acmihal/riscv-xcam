@@ -1,4 +1,3 @@
-#include <iostream>
 #include "xcam.h"
 
 using xcam::xcam_index_t;

@@ -18,7 +18,9 @@ protected:
     // The soft_cam_t object models stateful hardware.
     // There should be one instance of this class per processor core.
     soft_cam_t() { }
-    static soft_cam_t* singleton;
+
+    typedef std::map<int, soft_cam_t*> cpu_map_t;
+    static cpu_map_t cpu_map;
 
     typedef xcam_key_t key_type;
     typedef xcam_value_t data_type;
@@ -38,7 +40,7 @@ protected:
     void add_row(const state_ix_t ix);
 
 public:
-    static soft_cam_t* instance() { if (!singleton) singleton = new soft_cam_t(); return singleton; }
+    static soft_cam_t* instance(int cpu_id);
 
     xcam_subkey_t camlk0(const xcam_index_t ix, const int offset) const;
     xcam_subkey_t camlk1(const xcam_index_t ix, const int offset) const;

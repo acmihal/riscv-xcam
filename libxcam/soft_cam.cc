@@ -12,7 +12,14 @@ using xcam::xcam_key_t;
 using xcam::xcam_value_t;
 using xcam::xcam_entry_t;
 
-soft_cam_t* soft_cam_t::singleton = nullptr;
+soft_cam_t::cpu_map_t soft_cam_t::cpu_map;
+
+soft_cam_t* soft_cam_t::instance(int cpu_id) {
+    if (cpu_map.find(cpu_id) == cpu_map.end()) {
+        cpu_map[cpu_id] = new soft_cam_t();
+    }
+    return cpu_map[cpu_id];
+}
 
 xcam_subkey_t soft_cam_t::camlk0(const xcam_index_t ix, const int offset) const {
     const xcam_subkey_t result = cam_state.at(ix + offset).key.k0;

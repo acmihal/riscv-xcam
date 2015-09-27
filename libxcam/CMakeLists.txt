@@ -1,8 +1,17 @@
-add_library(xcamsw soft_cam.cc xcam_api.cc)
-#target_compile_features(libxcamsw PUBLIC cxx_nullptr)
+set(libxcam_srcs soft_cam.cc xcam_api.cc xcam_opcodes.cc)
+
+add_library(xcamsw ${libxcam_srcs})
 target_compile_definitions(xcamsw PUBLIC -DSOFT_XCAM)
+#target_compile_features(xcamsw PUBLIC cxx_nullptr)
 
 if(CMAKE_CROSSCOMPILING)
-    add_library(xcam soft_cam.cc xcam_api.cc)
-    #target_compile_features(libxcam PUBLIC cxx_nullptr)
-endif(CMAKE_CROSSCOMPILING)
+    add_library(xcam ${libxcam_srcs})
+    #target_compile_features(xcam PUBLIC cxx_nullptr)
+    # Install both cross-compiled libraries to the crosscompiler lib directory.
+    install(TARGETS xcam xcamsw
+	    ARCHIVE DESTINATION $ENV{RISCV}/riscv64-unknown-elf/lib/32)
+else()
+    # Install only the host sw-emulated library to the RISCV/lib directory.
+    install(TARGETS xcamsw
+            ARCHIVE DESTINATION $ENV{RISCV}/lib)
+endif()
