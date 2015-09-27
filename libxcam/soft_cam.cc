@@ -41,26 +41,32 @@ xcam_value_t soft_cam_t::camlv(const xcam_index_t ix, const int offset) const {
 
 void soft_cam_t::camsk0(const xcam_index_t ix, const int offset, const xcam_subkey_t k0) {
     const state_ix_t ixo = ix + offset;
-    remove_row(ixo);
-    cam_state.at(ixo).key.k0 = k0;
-    add_row(ixo);
     cout << "cam[" << ixo << "].k0 <= " << k0 << endl;
+    if (cam_state.at(ixo).key.k0 != k0) {
+        remove_row(ixo);
+        cam_state.at(ixo).key.k0 = k0;
+        add_row(ixo);
+    }
 }
 
 void soft_cam_t::camsk1(const xcam_index_t ix, const int offset, const xcam_subkey_t k1) {
     const state_ix_t ixo = ix + offset;
-    remove_row(ixo);
-    cam_state.at(ixo).key.k1 = k1;
-    add_row(ixo);
     cout << "cam[" << ixo << "].k1 <= " << k1 << endl;
+    if (cam_state.at(ixo).key.k1 != k1) {
+        remove_row(ixo);
+        cam_state.at(ixo).key.k1 = k1;
+        add_row(ixo);
+    }
 }
 
 void soft_cam_t::camsv(const xcam_index_t ix, const int offset, const xcam_value_t v) {
     const state_ix_t ixo = ix + offset;
-    remove_row(ixo);
-    cam_state.at(ixo).value = v;
-    add_row(ixo);
     cout << "cam[" << ixo << "].v <= " << v << endl;
+    if (cam_state.at(ixo).value != v) {
+        remove_row(ixo);
+        cam_state.at(ixo).value = v;
+        add_row(ixo);
+    }
 }
 
 void soft_cam_t::remove_row(const state_ix_t ix) {
@@ -133,7 +139,7 @@ xcam_value_t soft_cam_t::cam(const xcam_subkey_t k0, const xcam_subkey_t k1, con
         const xcam_subkey_t k1_suffix = k1 & ~mask;
         const xcam_value_t result_with_suffix = (result & mask) | k1_suffix;
 
-        cout << "    minimum ix=" << match_ix << " (" << result << " & 0x" << std::hex << mask << ") | 0x " << std::hex << k1_suffix << " = " << result_with_suffix << endl;
+        cout << "    minimum ix=" << match_ix << " (" << result << " & 0x" << std::hex << mask << ") | 0x" << std::hex << k1_suffix << " = " << result_with_suffix << endl;
         return result_with_suffix;
     }
     else {
