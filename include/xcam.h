@@ -10,4 +10,8 @@
 #include "xcam_opcodes.h"
 #include "xcam_api.h"
 
+extern "C" {
+  void libxcam_is_present(void);
+}
+
 #endif /* __XCAM_SW_H__ */

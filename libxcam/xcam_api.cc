@@ -6,6 +6,8 @@ using xcam::xcam_key_t;
 using xcam::xcam_value_t;
 using xcam::xcam_entry_t;
 
+void libxcam_is_present(void) { }
+
 xcam_entry_t xcam::caml(const xcam_index_t ix) {
     return xcam_entry_t(xcam::camlk(ix), xcam::camlv(ix));
 }
