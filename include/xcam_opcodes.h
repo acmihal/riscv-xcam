@@ -28,7 +28,9 @@ template <int Offset> xcam_subkey_t camlk0_sw(const xcam_index_t ix) {
     return soft::soft_cam_t::instance(0)->camlk0(ix, Offset);
 };
 
-xcam_subkey_t camlk0_sw(const int cpu_id, const xcam_index_t ix, const int offset);
+inline xcam_subkey_t camlk0_sw(const int cpu_id, const xcam_index_t ix, const int offset) {
+    return soft::soft_cam_t::instance(cpu_id)->camlk0(ix, offset);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // camlk1
@@ -47,7 +49,9 @@ template <int Offset> xcam_subkey_t camlk1_sw(const xcam_index_t ix) {
     return soft::soft_cam_t::instance(0)->camlk1(ix, Offset);
 };
 
-xcam_subkey_t camlk1_sw(const int cpu_id, const xcam_index_t ix, const int offset);
+inline xcam_subkey_t camlk1_sw(const int cpu_id, const xcam_index_t ix, const int offset) {
+    return soft::soft_cam_t::instance(cpu_id)->camlk1(ix, offset);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // camlv
@@ -66,7 +70,9 @@ template <int Offset> xcam_value_t camlv_sw(const xcam_index_t ix) {
     return soft::soft_cam_t::instance(0)->camlv(ix, Offset);
 };
 
-xcam_value_t camlv_sw(const int cpu_id, const xcam_index_t ix, const int offset);
+inline xcam_value_t camlv_sw(const int cpu_id, const xcam_index_t ix, const int offset) {
+    return soft::soft_cam_t::instance(cpu_id)->camlv(ix, offset);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // camsk0
@@ -83,7 +89,9 @@ template <int Offset> void camsk0_sw(const xcam_index_t ix, const xcam_subkey_t 
     soft::soft_cam_t::instance(0)->camsk0(ix, Offset, k0);
 };
 
-void camsk0_sw(const int cpu_id, const xcam_index_t ix, const int offset, const xcam_subkey_t k0);
+inline void camsk0_sw(const int cpu_id, const xcam_index_t ix, const int offset, const xcam_subkey_t k0) {
+    soft::soft_cam_t::instance(cpu_id)->camsk0(ix, offset, k0);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // camsk1
@@ -100,7 +108,9 @@ template <int Offset> void camsk1_sw(const xcam_index_t ix, const xcam_subkey_t 
     soft::soft_cam_t::instance(0)->camsk1(ix, Offset, k1);
 };
 
-void camsk1_sw(const int cpu_id, const xcam_index_t ix, const int offset, const xcam_subkey_t k1);
+inline void camsk1_sw(const int cpu_id, const xcam_index_t ix, const int offset, const xcam_subkey_t k1) {
+    soft::soft_cam_t::instance(cpu_id)->camsk1(ix, offset, k1);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // camsv
@@ -117,7 +127,9 @@ template <int Offset> void camsv_sw(const xcam_index_t ix, const xcam_value_t v)
     soft::soft_cam_t::instance(0)->camsv(ix, Offset, v);
 };
 
-void camsv_sw(const int cpu_id, const xcam_index_t ix, const int offset, const xcam_value_t v);
+inline void camsv_sw(const int cpu_id, const xcam_index_t ix, const int offset, const xcam_value_t v) {
+    soft::soft_cam_t::instance(cpu_id)->camsv(ix, offset, v);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // cam
@@ -136,7 +148,9 @@ template <int InsignificantBits> xcam_value_t cam_sw(const xcam_subkey_t k0, con
     return soft::soft_cam_t::instance(0)->cam(k0, k1, InsignificantBits);
 };
 
-xcam_value_t cam_sw(const int cpu_id, const xcam_subkey_t k0, const xcam_subkey_t k1, const int insignificantBits);
+inline xcam_value_t cam_sw(const int cpu_id, const xcam_subkey_t k0, const xcam_subkey_t k1, const int insignificantBits) {
+    return soft::soft_cam_t::instance(cpu_id)->cam(k0, k1, insignificantBits);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Type aliases

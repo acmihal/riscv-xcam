@@ -17,7 +17,7 @@ protected:
 
     // The soft_cam_t object models stateful hardware.
     // There should be one instance of this class per processor core.
-    soft_cam_t() { }
+    soft_cam_t() = default;
 
     typedef std::map<int, soft_cam_t*> cpu_map_t;
     static cpu_map_t cpu_map;
